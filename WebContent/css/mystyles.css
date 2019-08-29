@@ -1,0 +1,159 @@
+.checkbox-indigo[type="checkbox"].filled-in:checked + span:not(.lever):after {
+	
+    border: 1px solid #000000;  
+    background-color: #3949ab;
+    
+}
+
+.modal-med-large {
+
+	width: 35% !important;
+	
+	position: relative !important;
+  	top: 50% !important;
+  	transform: translateY(-150%) !important;
+	
+}
+
+.modal-small {
+
+	width: 75% !important;
+	
+	position: relative !important;
+  	top: 50% !important;
+  	transform: translateY(-200%) !important;
+	
+}
+
+.textarea-multirow {
+	
+	min-height: 20em !important;
+	
+}
+
+.textarea-multirow-idea {
+	
+	min-height: 10em !important;
+	
+}
+
+.no-margin {
+	
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+	left: 0px !important;
+	
+}
+
+.no-padding {
+	
+	padding: 0 !important;
+	
+}
+
+.text-strong {
+
+	color: black !important;
+	
+}
+
+.dropdown-content li > span > label {
+	
+  	color: black !important;
+  
+}
+
+.my-select {
+	
+	max-height:88px !important;
+	
+}
+
+.dropdown-content {
+	
+	max-height: 30rem;
+	
+}
+
+.dropdown-content li > a, .dropdown-content:not(.multiple-select-dropdown) li > span {
+
+  	padding: 0px 0px;
+  	line-height: 3rem;
+  
+}
+
+.button-filter {
+	
+	height: 46px;
+	
+}
+
+.href-aligned {
+	
+	line-height: 36px;	
+
+}
+
+td, th {
+	
+	padding-left: 0px;
+	
+}
+
+.header-button {
+	
+	margin-right: 0 !important;
+	
+}
+
+.lulaso {
+	
+	display: inline-block;
+	
+}
+
+.text-size-default {
+	
+	font-size: 16px !important;
+	
+}
+
+.my-dropdown-element {
+	
+	line-height: 64px !important;
+	padding: 0px 15px !important;
+	
+}
+
+.my-sidenav-element {
+	
+	font-size: 16px !important;
+	
+}
+
+.my-sidenav-element:hover {
+	
+	background-color: #3949ab !important;
+	color:white !important;
+	
+}
+
+.my-sidenav-element:hover > .my-sidenav-icon {
+
+	color: white !important;
+	
+}
+
+.my-sidenav-icon {
+	
+	color:black !important;
+	
+}
+
+td {
+	
+	text-overflow:ellipsis;
+	white-space: nowrap;
+  	overflow: hidden;
+	
+}

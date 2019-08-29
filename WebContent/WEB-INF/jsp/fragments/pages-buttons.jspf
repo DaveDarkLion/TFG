@@ -1,0 +1,42 @@
+<div class="input-field col s12 m10 push-m1">
+
+	<button class="btn-flat transparent text-strong waves-effect" id='page_first_button' onclick='setPageLink("form_main", 1)'><i class="material-icons center">first_page</i></button>
+	<button class="btn-flat transparent text-strong waves-effect" id='page_previous_button' onclick='setPageLink("form_main", ${model.page} - 1)'><i class="material-icons center">keyboard_arrow_left</i></button>
+	<button type="button" class="btn-flat transparent text-strong" style="cursor:default">${model.page}</button>
+	<button class="btn-flat transparent text-strong waves-effect" id='page_next_button' onclick='setPageLink("form_main", ${model.page} + 1)'><i class="material-icons center">keyboard_arrow_right</i></button>
+	<button class="btn-flat transparent text-strong waves-effect" id='page_last_button' onclick='setPageLink("form_main", ${model.pageLast})'><i class="material-icons center">last_page</i></button>
+
+</div>
+
+<script type='text/javascript'>
+	
+	if ('${model.page}' <= 1) {
+		
+		document.getElementById('page_first_button').disabled = true;
+		document.getElementById('page_previous_button').disabled = true;
+		
+	}
+	
+	if ('${model.page}' >= '${model.pageLast}') {
+		
+		document.getElementById('page_next_button').disabled = true;
+		document.getElementById('page_last_button').disabled = true;
+		
+	}
+	
+	function setPageLink (formId, page) {
+		
+		var form = document.getElementById(formId);
+		
+		var hidden = document.createElement('input');
+		hidden.setAttribute('type', 'hidden');
+		hidden.setAttribute('name', 'page');
+		hidden.setAttribute('value', page);
+		
+		form.appendChild(hidden);
+		
+		form.submit();
+		
+	}
+
+</script>

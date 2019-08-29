@@ -1,0 +1,128 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+		
+<table class="responsive-table text-size-default" style="table-layout:fixed;">
+	
+	<thead>
+		<tr>
+			<th style="width:40%">Título</th>
+			<th style="width:20%">Profesor</th>
+			<th style="width:20%">Dificultad</th>
+			<th style="width:10%"></th>
+			<th style="width:10%"></th>
+		</tr>
+	</thead>
+	
+	<tbody class="text-size-default" id="ejercicios_checked_table_body">
+	</tbody>
+	
+</table>
+   		
+<script type='text/javascript'>
+
+	var ejerciciosSetData = JSON.parse('${model.ejerciciosSetData}');
+	var ejerciciosCheckedData = JSON.parse('${model.ejerciciosCheckedData}');
+
+	var info = Array(ejerciciosSetData.length).fill(null).map(()=>Array(4).fill(null));
+
+	for (i = 0; i < ejerciciosSetData.length; i++) {
+	
+		info[i][0] = '<a href="ejercicios/' + ejerciciosSetData[i].id + '/view.html">' + ejerciciosSetData[i].titulo + '</a>';
+		info[i][1] = getDisplayNombre(ejerciciosSetData[i].profesor.persona);
+		info[i][2] = ejerciciosSetData[i].dificultad.nombre;
+		
+		if ('${model.movable}' > 0 && ('${model.editionMode}' > 0 || '${model.setType}' == 1)) {
+			
+			info[i][3] = '<button type="button" class="btn transparent text-strong waves-effect" onclick="moveUp(' + ejerciciosSetData[i].id + ')"';
+			if (i == 0) info [i][3] += " disabled";
+			info[i][3] += '><i class="material-icons center">arrow_upward</i></button>';
+			
+			info[i][3] += '<button type="button" class="btn transparent text-strong waves-effect" onclick="moveDown(' + ejerciciosSetData[i].id + ')"';
+			if (i == ejerciciosSetData.length - 1) info [i][3] += " disabled";
+			info[i][3] += '><i class="material-icons center">arrow_downward</i></button>';
+			
+		}
+		
+		info[i][4] = '<button type="button" class="btn transparent waves-effect" onclick="updateSet(' + ejerciciosSetData[i].id + ')"><i class="material-icons center" style="color:';
+
+		if (includes(ejerciciosCheckedData, ejerciciosSetData[i])) info[i][4] += 'red">remove_shopping_cart';
+		else info[i][4] += 'green">add_shopping_cart';
+		info[i][4] += '</i></button>';
+		
+	
+	}
+	
+	var table = document.getElementById('ejercicios_checked_table_body');
+	
+	tableDisplay(table, info);
+	
+	function updateSet (id) {
+		
+		document.getElementById('csrf').disabled = false;
+		
+		var page = '${model.page}';
+		var pageHidden = document.createElement('input');
+		pageHidden.type = 'hidden';
+		pageHidden.name = 'page';
+		pageHidden.value = page;
+		
+		var form = document.getElementById('form_main');
+		form.action = 'ejercicios.html';
+		form.method = 'POST';
+		
+		var cartEjercicioIdHidden = document.createElement('input');
+		cartEjercicioIdHidden.type = 'hidden';
+		cartEjercicioIdHidden.name = 'cart_ejercicio_id';
+		cartEjercicioIdHidden.value = id;
+		
+		form.appendChild(pageHidden);
+		form.appendChild(cartEjercicioIdHidden);
+		
+		form.submit();
+		
+	}
+
+	function moveUp (id) {
+		
+		move('up', id)
+		
+	}
+	
+	function moveDown (id) {
+		
+		move('down', id)
+		
+	}
+
+	function move (where, id) {
+		
+		document.getElementById('csrf').disabled = false;
+		
+		var page = '${model.page}';
+		var pageHidden = document.createElement('input');
+		pageHidden.type = 'hidden';
+		pageHidden.name = 'page';
+		pageHidden.value = page;
+		
+		var idHidden = document.createElement('input');
+		idHidden.type = 'hidden';
+		idHidden.name = 'move_id';
+		idHidden.value = id;
+		
+		var whereHidden = document.createElement('input');
+		whereHidden.type = 'hidden';
+		whereHidden.name = 'move_' + where;
+		whereHidden.value = 1;
+		
+		var form = document.getElementById('form_main');
+		
+		form.appendChild(pageHidden);
+		form.appendChild(idHidden);
+		form.appendChild(whereHidden);
+		
+		form.action = 'ejercicios.html';
+		form.method = 'POST';
+		form.submit();
+		
+	}
+
+</script>

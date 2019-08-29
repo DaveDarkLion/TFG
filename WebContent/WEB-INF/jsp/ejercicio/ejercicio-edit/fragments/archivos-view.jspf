@@ -1,0 +1,76 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+										
+<ul class="collapsible">
+	<li>
+		<div class="collapsible-header" id="archivos_entrada_div"><i class="material-icons right">insert_drive_file</i>Archivos de entrada</div>
+		<div class="collapsible-body">
+			<ul class="collection row" id="archivos_entrada">
+			</ul>
+		</div>
+	</li>
+</ul>
+
+<ul class="collapsible">
+	<li>
+		<div class="collapsible-header" id="archivos_validacion_div"><i class="material-icons right">insert_drive_file</i>Archivos de validación</div>
+		<div class="collapsible-body">
+			<ul class="collection" id="archivos_validacion">
+			</ul>
+		</div>
+	</li>
+</ul>
+
+<ul class="collapsible">
+	<li>
+		<div class="collapsible-header" id="archivos_solucion_div"><i class="material-icons right">insert_drive_file</i>Archivos solución</div>
+		<div class="collapsible-body">
+			<ul class="collection" id="archivos_solucion">
+			</ul>
+		</div>
+	</li>
+</ul>
+
+<script type='text/javascript'>
+
+	var ejercicioData = JSON.parse('${model.ejercicioData}');
+	
+	var archivosEntradaData = ejercicioData.archivosEntrada;
+	var archivosValidacionData = ejercicioData.archivosValidacion;
+	var archivosSolucionData = ejercicioData.archivosSolucion;
+
+	getArchivosData(document.getElementById('archivos_entrada'), document.getElementById('archivos_entrada_div'), 'entrada', archivosEntradaData);
+	getArchivosData(document.getElementById('archivos_validacion'), document.getElementById('archivos_validacion_div'), 'validacion', archivosValidacionData);
+	getArchivosData(document.getElementById('archivos_solucion'), document.getElementById('archivos_solucion_div'), 'solucion', archivosSolucionData);
+	
+	function getArchivosData (ul, div, name, archivosData) {
+		
+		if (archivosData.length > 0) div.innerHTML += " (" + archivosData.length + " archivos)";
+		
+		for (i = 0; i < archivosData.length; i++) {
+			
+			var li = document.createElement("li");
+			li.id = name + "_div_" + i;
+			li.className = "collection-item row col s12";
+			
+			var archivo = document.createElement("a");
+			archivo.setAttribute("href", "/ejercicios-programacion/archivos/" + archivosData[i].id + ".html");
+			archivo.innerHTML = archivosData[i].nombre;
+			
+			var archivoDiv = document.createElement("div");
+			archivoDiv.className = "input-field col s12 m11";
+			archivoDiv.appendChild(archivo);
+			
+			li.appendChild(archivoDiv);
+			ul.appendChild(li);
+			
+		}
+	
+	}
+	
+	$(document).ready(function(){
+		
+		$('.collapsible').collapsible();
+		
+	});
+
+</script>

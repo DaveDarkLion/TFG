@@ -1,0 +1,40 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<select id="profesor_email" name="profesor_email">
+	<c:if test='${model.profesorAny > 0}'>
+		<option id="profesor_any" value="any">Cualquiera</option>
+	</c:if>
+</select>
+
+<script type='text/javascript'>
+
+	var profesorCurrentData = JSON.parse('${model.profesorCurrentData}');
+	var profesoresData = JSON.parse('${model.profesoresData}');
+	var select = document.getElementById('profesor_email');
+	
+	var current = new Object();
+	
+	if (!objectIsEmpty(profesorCurrentData)) current = profesorCurrentData.persona.email
+	else if ("${model.profesorAny}" > 0) document.getElementById("profesor_any").selected = "selected";
+	else current = profesoresData[0].persona.email;
+	
+	var list = new Array(profesoresData.length);
+	
+	for (var i = 0; i < profesoresData.length; i++) {
+		
+		list[i] = new Object();
+		
+		list[i].id = profesoresData[i].persona.email;
+		list[i].name = getDisplayNombre(profesoresData[i].persona);
+		
+	}
+	
+	selectDisplay(select, current, list);
+	
+	$(document).ready(function() {
+
+		$('select').formSelect();
+		        
+	});
+	
+</script>

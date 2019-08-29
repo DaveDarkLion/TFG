@@ -1,0 +1,41 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<select id="role_id" name="role_id">
+	<c:if test='${model.roleAny > 0}'>
+		<option id="role_any" value="-1">Cualquiera</option>
+	</c:if>
+</select>
+
+<script type='text/javascript'>
+
+	var data = JSON.parse('${model.rolesData}');
+	var roleCurrentData = data.current
+	var rolesData = data.list;
+	var select = document.getElementById('role_id');
+	
+	var current = new Object();
+	
+	if (!objectIsEmpty(roleCurrentData)) current = roleCurrentData.id;
+	else if ("${model.roleAny}" > 0) document.getElementById("role_any").selected = "selected";
+	else current = rolesData[0].id;
+	
+	var list = new Array(rolesData.length);
+	
+	for (var i = 0; i < rolesData.length; i++) {
+		
+		list[i] = new Object();
+		
+		list[i].id = rolesData[i].id;
+		list[i].name = rolesData[i].name;
+		
+	}
+	
+	selectDisplay(select, current, list);
+	
+	$(document).ready(function() {
+
+		$('select').formSelect();
+		        
+	});
+	
+</script>

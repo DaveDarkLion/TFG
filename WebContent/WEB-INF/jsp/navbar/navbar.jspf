@@ -1,0 +1,303 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	
+<nav>
+    <div class="nav-wrapper indigo darken-1">
+    	<ul id="nav-mobile" class="left hide-on-large-only">
+    	
+    		<c:if test='${not empty pageContext.request.remoteUser}'>
+    	
+    			<li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons center md-dark">menu</i></a></li>
+    			
+    		</c:if>
+    		
+    	</ul>
+    	
+    	<ul class="left hide-on-med-and-down">
+    		
+    		<li><a href="javascript:history.back()" class="hide-on-med-and-down"><i class="material-icons left md-dark">navigate_before</i>Volver</a></li>
+    		
+    		<c:if test='${not empty pageContext.request.remoteUser}'>
+    		
+				<li><a class="dropdown-trigger" data-target="dropdown_ejercicios" id="ejercicios">Ejercicios<i class="material-icons right">arrow_drop_down</i></a></li>
+				<li>
+					<ul id="dropdown_ejercicios" class="dropdown-content z-depth-1">
+					  	<li><a class="my-dropdown-element" href="/ejercicios-programacion/ejercicios.html">Listar</a></li>
+					  	<c:if test="${model.isProfesor > 0 || model.isAdmin > 0}">
+					  		<li><a class="my-dropdown-element" href="/ejercicios-programacion/ejercicios/add.html">Nuevo</a></li>
+					  	</c:if>
+					</ul>
+				</li>
+				
+				<li><a class="dropdown-trigger" href="#!" data-target="dropdown_examenes" id="examenes">Exámenes<i class="material-icons right">arrow_drop_down</i></a></li>
+				<li>
+					<ul id="dropdown_examenes" class="dropdown-content z-depth-1">
+					  	<li><a class="my-dropdown-element" href="/ejercicios-programacion/examenes.html">Listar</a></li>
+					  	<c:if test="${model.isProfesor > 0 || model.isAdmin > 0}">
+					  		<li><a class="my-dropdown-element" href="/ejercicios-programacion/examenes/add.html">Nuevo</a></li>
+					  	</c:if>
+					</ul>
+				</li>
+			
+				<li><a class="dropdown-trigger" href="#!" data-target="dropdown_practicas" id="practicas">Prácticas<i class="material-icons right">arrow_drop_down</i></a></li>
+				<li>
+					<ul id="dropdown_practicas" class="dropdown-content z-depth-1">
+					  	<li><a class="my-dropdown-element" href="/ejercicios-programacion/practicas.html">Listar</a></li>
+					  	<c:if test="${model.isProfesor > 0 || model.isAdmin > 0}">
+					  		<li><a class="my-dropdown-element" href="/ejercicios-programacion/practicas/add.html">Nueva</a></li>
+					  	</c:if>
+					</ul>
+				</li>
+				
+				<li><a class="dropdown-trigger" href="#!" data-target="dropdown_practicas_evaluacion" id="practicas_evaluacion">Prácticas evaluables<i class="material-icons right">arrow_drop_down</i></a></li>
+				<li>
+					<ul id="dropdown_practicas_evaluacion" class="dropdown-content z-depth-1">
+					  	<li><a class="my-dropdown-element" href="/ejercicios-programacion/practicas-evaluacion.html">Listar</a></li>
+					  	<c:if test="${model.isProfesor > 0 || model.isAdmin > 0}">
+					  		<li><a class="my-dropdown-element" href="/ejercicios-programacion/practicas-evaluacion/add.html">Nueva</a></li>
+					  	</c:if>
+					</ul>
+				</li>
+				
+	    		<c:if test="${model.isAdmin > 0}">
+	    			<li><a class="sidenav-trigger show-on-large" style="margin-left:0px" data-target="slide-out" href="#!" data-target="dropdown_practicas_evaluacion" id="practicas_evaluacion">Admin<i class="material-icons right">menu</i></a></li>
+	    		</c:if>
+	    		
+	    	</c:if>
+    		
+    	</ul>
+    	
+     	<ul class="right">
+	      
+			<c:choose>
+			
+				<c:when test='${not empty pageContext.request.remoteUser}'>
+				
+					<li><a href="/ejercicios-programacion/ejercicios.html?set_type=1" class="tooltipped hide-on-med-and-down" data-position="bottom" data-tooltip="Mi selección"><i class="material-icons center md-dark">shopping_cart</i></a></li>
+					
+					<li><a class="dropdown-trigger hide-on-med-and-down" href="#!" data-target="dropdown_persona" id="persona"><i class="material-icons left md-dark">account_circle</i><i class="material-icons right">arrow_drop_down</i></a></li>
+					<li>
+						<ul id="dropdown_persona" class="dropdown-content z-depth-1">
+							<li><a class="my-dropdown-element" href="/ejercicios-programacion/profile.html"><i class="material-icons left md-dark">account_circle</i>Perfil</a></li>
+							<c:if test="${model.isProfesor > 0}">
+								<li><a class="my-dropdown-element" style="padding-left:64px !important;" href="/ejercicios-programacion/ideas.html">Mis ideas</a></li>
+								<li><a class="my-dropdown-element" style="padding-left:64px !important;" href="/ejercicios-programacion/ideas/add.html">Crear idea</a></li>
+							</c:if>
+							<li><a class="my-dropdown-element" href="/ejercicios-programacion/logout.html"><i class="material-icons left md-dark">power_settings_new</i>Salir</a></li>
+						</ul>
+					</li>
+					
+				</c:when>
+				
+				<c:otherwise>
+				
+					<li><a href="/ejercicios-programacion/login.html"><i class="material-icons left md-dark">power_settings_new</i>Entrar</a></li>
+					
+				</c:otherwise>
+				
+			</c:choose>
+		
+		</ul>
+		
+		<ul id="slide-out" class="sidenav left">
+		
+			<li class="hide-on-small-only">
+			
+				<ul class="collapsible" style="padding-top:0px">
+					<li class="bold"><a class="collapsible-header my-sidenav-element" style="line-height:64px;" id="persona_sidenav"><i class="material-icons right my-sidenav-icon" style="line-height:64px">account_circle</i></a>
+		           		<div class="collapsible-body" style="">
+		            		<ul>
+		                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/profile.html">Perfil</a></li>
+								<li><a class="my-sidenav-element" href="/ejercicios-programacion/ejercicios.html?set_type=1"><i class="material-icons right md-dark my-sidenav-icon">shopping_cart</i>Mi selección</a></li>
+								<c:if test="${model.isProfesor > 0}">
+									<li><a class="my-sidenav-element" href="/ejercicios-programacion/ideas.html">Mis ideas</a></li>
+									<li><a class="my-sidenav-element" href="/ejercicios-programacion/ideas/add.html">Crear idea</a></li>
+								</c:if>
+								<li><a class="my-sidenav-element" href="/ejercicios-programacion/logout.html"><i class="material-icons right md-dark my-sidenav-icon">power_settings_new</i>Salir</a></li>
+		                	</ul>
+		              	</div>
+		           	</li>
+	              	<li class="divider hide-on-small-only" tabindex="-1"></li>
+				</ul>
+				
+			</li>
+				
+			<li class="hide-on-med-and-up">
+			
+				<ul class="collapsible" style="padding-top:0px">
+					<li class="bold"><a class="collapsible-header my-sidenav-element" style="line-height:56px;" id="persona_sidenav_2"><i class="material-icons right my-sidenav-icon" style="line-height:64px">account_circle</i></a>
+	           		<div class="collapsible-body" style="">
+	            		<ul>
+	                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/profile.html">Perfil</a></li>
+							<li><a class="my-sidenav-element" href="/ejercicios-programacion/ejercicios.html?set_type=1"><i class="material-icons right md-dark my-sidenav-icon">shopping_cart</i>Mi selección</a></li>
+							<c:if test="${model.isProfesor > 0}">
+								<li><a class="my-sidenav-element" href="/ejercicios-programacion/ideas.html">Mis ideas</a></li>
+								<li><a class="my-sidenav-element" href="/ejercicios-programacion/ideas/add.html">Crear idea</a></li>
+							</c:if>
+							<li><a class="my-sidenav-element" href="/ejercicios-programacion/logout.html"><i class="material-icons right md-dark my-sidenav-icon">power_settings_new</i>Salir</a></li>
+	                	</ul>
+	              	</div>
+	              	</li>
+	              	<li class="divider hide-on-med-and-up" tabindex="-1"></li>
+				</ul>
+				
+			</li>
+			
+			<li>
+			
+				<ul class="collapsible hide-on-large-only">
+					<li class="bold"><a class="collapsible-header my-sidenav-element">Ejercicios</a>
+	           		<div class="collapsible-body" style="">
+	            		<ul>
+	                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/ejercicios.html">Listar<i class="material-icons right md-dark my-sidenav-icon">list</i></a></li>
+							<c:if test="${model.isProfesor > 0 || model.isAdmin > 0}">
+						  		<li><a class="my-sidenav-element" href="/ejercicios-programacion/ejercicios/add.html">Nuevo<i class="material-icons right md-dark my-sidenav-icon">edit</i></a></li>
+							</c:if>
+	                	</ul>
+	              	</div>
+				</ul>
+				
+			</li>
+			
+			<li>
+				
+				<ul class="collapsible hide-on-large-only">
+					<li class="bold"><a class="collapsible-header my-sidenav-element">Exámenes</a>
+	           		<div class="collapsible-body" style="">
+	            		<ul>
+	                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/examenes.html">Listar<i class="material-icons right md-dark my-sidenav-icon">list</i></a></li>
+							<c:if test="${model.isProfesor > 0 || model.isAdmin > 0}">
+						  		<li><a class="my-sidenav-element" href="/ejercicios-programacion/examenes/add.html">Nuevo<i class="material-icons right md-dark my-sidenav-icon">edit</i></a></li>
+							</c:if>
+	                	</ul>
+	              	</div>
+				</ul>
+				
+			</li>
+			
+			<li>
+				
+				<ul class="collapsible hide-on-large-only">
+					<li class="bold"><a class="collapsible-header my-sidenav-element">Prácticas</a>
+	           		<div class="collapsible-body" style="">
+	            		<ul>
+	                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/practicas.html">Listar<i class="material-icons right md-dark my-sidenav-icon">list</i></a></li>
+							<c:if test="${model.isProfesor > 0 || model.isAdmin > 0}">
+						  		<li><a class="my-sidenav-element" href="/ejercicios-programacion/practicas/add.html">Nueva<i class="material-icons right md-dark my-sidenav-icon">edit</i></a></li>
+							</c:if>
+	                	</ul>
+	              	</div>
+				</ul>
+				
+			<li>
+				
+				<ul class="collapsible hide-on-large-only">
+					<li class="bold"><a class="collapsible-header my-sidenav-element">Prácticas evaluables</a>
+	           		<div class="collapsible-body" style="">
+	            		<ul>
+	                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/practicas-evaluacion.html">Listar<i class="material-icons right md-dark my-sidenav-icon">list</i></a></li>
+							<c:if test="${model.isProfesor > 0 || model.isAdmin > 0}">
+						  		<li><a class="my-sidenav-element" href="/ejercicios-programacion/practicas-evaluacion/add.html">Nueva<i class="material-icons right md-dark my-sidenav-icon">edit</i></a></li>
+							</c:if>
+	                	</ul>
+	              	</div>
+				</ul>
+				
+			</li>
+				
+			<c:if test="${model.isAdmin > 0}">
+			
+				<li class="divider" tabindex="-1"></li>
+			
+				<li>
+			
+					<ul class="collapsible">
+						<li class="bold"><a class="collapsible-header my-sidenav-element">Dificultades</a>
+		           		<div class="collapsible-body" style="">
+		            		<ul>
+		                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/dificultades.html">Listar<i class="material-icons right md-dark my-sidenav-icon">list</i></a></li>
+							  	<li><a class="my-sidenav-element" href="/ejercicios-programacion/dificultades/add.html">Nueva<i class="material-icons right md-dark my-sidenav-icon">edit</i></a></li>
+		                	</ul>
+		              	</div>
+					</ul>
+				
+				</li>
+				
+				<li>
+				
+					<ul class="collapsible">
+						<li class="bold"><a class="collapsible-header my-sidenav-element">Categorías</a>
+		           		<div class="collapsible-body" style="">
+		            		<ul>
+		                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/categorias.html">Listar<i class="material-icons right md-dark my-sidenav-icon">list</i></a></li>
+							  	<li><a class="my-sidenav-element" href="/ejercicios-programacion/categorias/add.html">Nueva<i class="material-icons right md-dark my-sidenav-icon">edit</i></a></li>
+		                	</ul>
+		              	</div>
+					</ul>
+				
+				</li>
+				
+				<li>
+				
+					<ul class="collapsible">
+						<li class="bold"><a class="collapsible-header my-sidenav-element">Titulaciones</a>
+		           		<div class="collapsible-body" style="">
+		            		<ul>
+		                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/titulaciones.html">Listar<i class="material-icons right md-dark my-sidenav-icon">list</i></a></li>
+							  	<li><a class="my-sidenav-element" href="/ejercicios-programacion/titulaciones/add.html">Nueva<i class="material-icons right md-dark my-sidenav-icon">edit</i></a></li>
+		                	</ul>
+		              	</div>
+					</ul>
+				
+				</li>
+				
+				<li>
+				
+					<ul class="collapsible">
+						<li class="bold"><a class="collapsible-header my-sidenav-element">Usuarios</a>
+		           		<div class="collapsible-body" style="">
+		            		<ul>
+		                		<li><a class="my-sidenav-element" href="/ejercicios-programacion/usuarios.html">Listar<i class="material-icons right md-dark my-sidenav-icon">list</i></a></li>
+							  	<li><a class="my-sidenav-element" href="/ejercicios-programacion/usuarios/add.html">Nuevo<i class="material-icons right md-dark my-sidenav-icon">edit</i></a></li>
+							  	<li><a class="my-sidenav-element" href="/ejercicios-programacion/usuarios/add-from-file.html">Nuevos desde archivo<i class="material-icons right md-dark my-sidenav-icon">edit</i></a></li>
+		                	</ul>
+		              	</div>
+					</ul>
+				
+				</li>
+				
+			</c:if>
+		
+		</ul>
+			
+	</div>
+		
+	<script type='text/javascript'>
+
+		if ('${model.profileData}' != '') {
+		
+			var profileData = JSON.parse('${model.profileData}');
+						
+			document.getElementById("persona").innerHTML += getDisplayNombreSimple(profileData);
+			document.getElementById("persona_sidenav").innerHTML += getDisplayNombreSimple(profileData);
+			document.getElementById("persona_sidenav_2").innerHTML += getDisplayNombreSimple(profileData);
+			
+		}
+		
+		$(document).ready(function(){
+			
+			$('.sidenav').sidenav();
+			$('.collapsible').collapsible();
+			
+			$("#ejercicios").dropdown();
+			$("#examenes").dropdown();
+			$("#practicas").dropdown();
+			$("#practicas_evaluacion").dropdown();
+			$("#persona").dropdown();
+			        
+			$('.tooltipped').tooltip();
+			
+		});
+	
+	</script>
+		
+</nav>

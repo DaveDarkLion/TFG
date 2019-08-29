@@ -1,0 +1,40 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<select id="dificultad_id" name="dificultad_id">
+	<c:if test='${model.dificultadAny > 0}'>
+		<option id="dificultad_any" value="-1">Cualquiera</option>
+	</c:if>
+</select>
+
+<script type='text/javascript'>
+
+	var dificultadCurrentData = JSON.parse('${model.dificultadCurrentData}');
+	var dificultadesData = JSON.parse('${model.dificultadesData}');
+	var select = document.getElementById('dificultad_id');
+	
+	var current = new Object();
+	
+	if (!objectIsEmpty(dificultadCurrentData)) current = dificultadCurrentData.id;
+	else if ("${model.dificultadAny}" > 0) document.getElementById("dificultad_any").selected = "selected";
+	else current = dificultadesData[0].id;
+	
+	var list = new Array(dificultadesData.length);
+	
+	for (var i = 0; i < dificultadesData.length; i++) {
+		
+		list[i] = new Object();
+		
+		list[i].id = dificultadesData[i].id;
+		list[i].name = dificultadesData[i].nombre;
+		
+	}
+	
+	selectDisplay(select, current, list);
+	
+	$(document).ready(function() {
+
+		$('select').formSelect();
+		        
+	});
+	
+</script>

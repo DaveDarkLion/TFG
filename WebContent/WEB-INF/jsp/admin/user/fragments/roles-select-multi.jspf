@@ -1,0 +1,43 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<select multiple id="roles_id" name="roles_id[]">
+</select>
+
+<script type='text/javascript'>
+
+	var rolesCurrentData = JSON.parse('${model.rolesCurrentData}');
+	var rolesData = JSON.parse('${model.rolesData}');
+	var select = document.getElementById('roles_id');
+	
+	var current = new Array();
+	
+	if (!objectIsEmpty(rolesCurrentData)) {
+		
+		current = new Array(rolesCurrentData.length);
+		
+		for (var i = 0; i < rolesCurrentData.length; i++) current[i] = rolesCurrentData[i].id;
+		
+	}
+	
+	else current = new Array();
+	
+	var list = new Array(rolesData.length);
+	
+	for (var i = 0; i < rolesData.length; i++) {
+		
+		list[i] = new Object();
+		
+		list[i].id = rolesData[i].id;
+		list[i].name = rolesData[i].name;
+		
+	}
+	
+	selectMultiDisplay(select, current, list);
+	
+	$(document).ready(function() {
+
+		$('select').formSelect();
+		        
+	});
+
+</script>

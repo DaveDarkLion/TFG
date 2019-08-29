@@ -1,0 +1,20 @@
+- Los alumnos se registran ellos o los registra el admin y les otorga una clave? = Los registra el admin a travez de un archivo de texto, la clave en principio se genera aleatoriamente, se les manda por correo a cada uno y luego cada alumno la puede cambiar
+- Como identificar a los usuarios (email, dni...) = email
+- Si email, mandar email confirmacion, poder cambiar email...? = mandar clave inicial
+- Como sabemos cuando una practica se vuelve visible para los alumnos? Los examenes son visibles para los alumnos? Que ejercicios son visibles para los alumnos? = Campo "visibilidad" que puedan activar los profesores
+- Añadir / Eliminar ejercicios de Examen / Practica / Practica Evaluacion despues de que hayan sido creadas? = Campo "final" que cuando este activo no se pueda cambiar nada
+- Estructuracion: Puede poner funciones como getDisplayName() en el modelo o deberia tener una capa intermedia? = Si, no importa romper la desacoplabilidad por un motivo tan simple
+- Que hacer cuando un usuario intenta acceder a una pagina no permitida 403 forbidden = Mostrar error tipo "No se puede acceder a este contenido"
+- Como identificar las practicas, que no tienen una descripcion? = añadirles descripcion y hacer que todas sean iguales
+- Errores genericos o especificos? = Errores internos genericos, errores tipo "no ha introducido un enunciado" específicos
+- Formato del pdf a mostrar = Formato genérico, sin opciones de modificacion
+- Optimizaciones en cuanto a tiempo de ejecución? = No, solo intentar hacer que ejecute en un tiempo razonable
+- Limitaciones de los archivos a subir (tamaño, extension...) = Solo tamaño (50 mb)
+- Formato de los passwords (tamaño máximo, incluir números, mayúsculas...) = Tamaño máximo = 8 chars, al menos 1 número y 1 mayúscula
+
+Añadir:
+
+	- Filtrar por rango de años de colección en vez de por año concreto
+	- Todos los profesores pueden editar todos los ejercicios, examenes, ideas...
+	- Aunque los profesores pueden ver todas las ideas, poner checkbox y en principio solo mostrar sus ideas
+	- No mostrar todos los ejercicios de inicio, hacer que aparezcan filtrados por defecto de alguna forma

@@ -1,0 +1,16 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<select id="document_id" name="document_id">
+	<option value="1" selected="selected">PDF</option>
+	<option value="0">LaTex</option>
+</select>
+
+<script type='text/javascript'>
+	
+	$(document).ready(function() {
+
+		$('select').formSelect();
+		        
+	});
+	
+</script>

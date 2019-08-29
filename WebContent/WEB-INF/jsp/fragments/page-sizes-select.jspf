@@ -1,0 +1,22 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<select class="input-field" id="page_size_id" name="page_size_id" onchange="submitForm('form_main', 'GET', '')">
+</select>
+
+<script type='text/javascript'>
+
+	var pageSizesData = JSON.parse('${model.pageSizesData}');
+	var select = document.getElementById('page_size_id');
+	
+	var current = pageSizesData.current.id;
+	var list = pageSizesData.list;
+	
+	selectDisplay(select, current, list);
+	
+	$(document).ready(function() {
+
+		$('select').formSelect();
+		        
+	});
+	
+</script>

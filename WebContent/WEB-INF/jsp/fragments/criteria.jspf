@@ -1,0 +1,23 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<input type="hidden" id="criteria" name="criteria" value="${model.criteria}" />
+<input type="hidden" id="reverse" name="reverse" value="${model.reverse}" />
+
+<script type="text/javascript">
+
+	function setPageCriteria (criteria) {
+			
+		var form = document.getElementById("form_main");
+		
+		var criteriaHidden = document.getElementById("criteria");
+		var reverse = document.getElementById("reverse");
+		
+		if (criteriaHidden.value == criteria && reverse.value == 0) reverse.value = 1;
+		else reverse.value = 0;
+		
+		criteriaHidden.value = criteria;
+		form.submit();
+		
+	}
+
+</script>

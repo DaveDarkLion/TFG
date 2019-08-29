@@ -1,0 +1,43 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<select multiple id="categorias_id" name="categorias_id[]">
+</select>
+
+<script type='text/javascript'>
+
+	var categoriasCurrentData = JSON.parse('${model.categoriasCurrentData}');
+	var categoriasData = JSON.parse('${model.categoriasData}');
+	var select = document.getElementById('categorias_id');
+	
+	var current = new Array();
+	
+	if (!objectIsEmpty(categoriasCurrentData)) {
+		
+		current = new Array(categoriasCurrentData.length);
+		
+		for (var i = 0; i < categoriasCurrentData.length; i++) current[i] = categoriasCurrentData[i].id;
+		
+	}
+	
+	else current = new Array();
+	
+	var list = new Array(categoriasData.length);
+	
+	for (var i = 0; i < categoriasData.length; i++) {
+		
+		list[i] = new Object();
+		
+		list[i].id = categoriasData[i].id;
+		list[i].name = categoriasData[i].nombre;
+		
+	}
+	
+	selectMultiDisplay(select, current, list);
+	
+	$(document).ready(function() {
+
+		$('select').formSelect();
+		        
+	});
+
+</script>

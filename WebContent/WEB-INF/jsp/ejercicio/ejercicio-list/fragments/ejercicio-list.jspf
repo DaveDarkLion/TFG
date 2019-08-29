@@ -1,0 +1,85 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+		
+<table class="responsive-table text-size-default" style="table-layout:fixed;">
+	
+	<thead>
+		<tr>
+			<th id="titulo" style="width:40%;cursor:pointer" onclick="setPageCriteria(0)">Título</th>
+			<th id="profesor" style="width:20%;cursor:pointer" onclick="setPageCriteria(1)">Profesor</th>
+			<th id="dificultad" style="width:20%;cursor:pointer" onclick="setPageCriteria(2)">Dificultad</th>
+			<th style="width:10%"></th>
+			<th style="width:10%"></th>
+		</tr>
+	</thead>
+	
+	<tbody class="text-size-default" id="ejercicios_table_body">
+	</tbody>
+	
+</table>
+   		
+<script type='text/javascript'>
+
+	var ejerciciosData = JSON.parse('${model.ejerciciosData}');
+	var ejerciciosSetData = JSON.parse('${model.ejerciciosSetData}');
+
+	var info = Array(ejerciciosData.length).fill(null).map(()=>Array(4).fill(null));
+
+	for (i = 0; i < ejerciciosData.length; i++) {
+	
+		info[i][0] = '<a href="ejercicios/' + ejerciciosData[i].id + '/view.html">' + ejerciciosData[i].titulo + '</a>';
+		info[i][1] = getDisplayNombre(ejerciciosData[i].profesor.persona);
+		info[i][2] = ejerciciosData[i].dificultad.nombre;
+		info[i][4] = '<button type="button" class="btn transparent waves-effect" onclick="setUpdate(' + ejerciciosData[i].id + ')"><i class="material-icons center" style="color:';
+		if (includes(ejerciciosSetData, ejerciciosData[i])) info[i][4] += 'red">remove_shopping_cart';
+		else info[i][4] += 'green">add_shopping_cart';
+		info[i][4] += '</i></button>';
+	
+	}
+	
+	var table = document.getElementById('ejercicios_table_body');
+	
+	tableDisplay(table, info);
+	
+	setCriteriaHeader();
+	
+	function setUpdate (id) {
+		
+		var page = '${model.page}';
+		var pageHidden = document.createElement('input');
+		pageHidden.setAttribute('type', 'hidden');
+		pageHidden.setAttribute('name', 'page');
+		pageHidden.setAttribute('value', page);
+		
+		var formMain = document.getElementById('form_main');
+		formMain.setAttribute('action', 'ejercicios.html?cart_ejercicio_id=' + id);
+		formMain.setAttribute('method', 'post');
+		
+		formMain.appendChild(pageHidden);
+		
+		document.getElementById('csrf').disabled = false;
+		
+		formMain.submit();
+		
+	}
+	
+	function setCriteriaHeader () {
+		
+		var criteria = "${model.criteria}";
+		var reverse = "${model.reverse}";
+		
+		var header;
+		
+		if (criteria == 1) header = document.getElementById("profesor");
+		else if (criteria == 2) header = document.getElementById("dificultad");
+		else header = document.getElementById("titulo");
+		
+		var arrow;
+		
+		if (reverse > 0) arrow = "&#8593;";
+		else arrow = "&#8595";
+		
+		header.innerHTML += " " + arrow;
+		
+	}
+	
+</script>
